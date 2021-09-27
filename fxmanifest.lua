@@ -1,6 +1,9 @@
 fx_version 'cerulean'
 game 'common'
 
+description 'QB-Menu'
+version '0.0.1'
+
 ui_page 'html/index.html'
 
 shared_script {
