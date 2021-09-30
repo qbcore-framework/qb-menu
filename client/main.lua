@@ -245,6 +245,7 @@ RegisterNUICallback('SelectOption', function(option, cb)
                 print("No trigger setup")
             end
         end
+	MenuActive = false			
     end)
 end)
 
