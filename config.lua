@@ -24,6 +24,12 @@ Config.BoxZones = {
                     description = 'Testie'
                 },
                 {
+                    type = "client", -- client/server/command/qbcommand
+                    event = "eventname",
+                    options = {
+                        data = "chips",
+                        data1 = "chips1",-- Send values. args. bla bla.
+                    },
                     title = 'Test 1',
                     description = 'Testie'
                 }
