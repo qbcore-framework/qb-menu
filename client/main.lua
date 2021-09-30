@@ -269,7 +269,8 @@ CreateThread(function()
         for k, v in pairs(Config.CircleZones) do
             Functions:AddCircleZone(v.name, v.coords, v.radius, {
                 name = v.name,
-                debugPoly = v.debugPoly
+                debugPoly = v.debugPoly,
+		useZ = v.useZ
             }, v.menuoptions)
         end
     elseif Config.CircleZones == nil then
