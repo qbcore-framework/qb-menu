@@ -12,13 +12,15 @@ local Functions = {
                 if Config.Debug then
                     print('Entered Zone')
                 end
-                TooltipActive = true
-                CurrentZoneOptions = menuoptions
-                InZone = true
-                SendNUIMessage({
-                    action = "OpenTooltip",
-                    menu = self:CloneTable(menuoptions)
-                })
+                if (menuoptions.job == PlayerData.job.name or menuoptions.job == nil or (menuoptions.job[PlayerData.job.name] and menuoptions.job[PlayerData.job.name]<=PlayerData.job.grade.level)) then 
+                    TooltipActive = true
+                    CurrentZoneOptions = menuoptions
+                    InZone = true
+                    SendNUIMessage({
+                        action = "OpenTooltip",
+                        menu = self:CloneTable(menuoptions)
+                    })
+                end
             else
                 if Config.Debug then
                     print('Exited Zone')
@@ -41,13 +43,15 @@ local Functions = {
                 if Config.Debug then
                     print('Entered Zone')
                 end
-                TooltipActive = true
-                CurrentZoneOptions = menuoptions
-                InZone = true
-                SendNUIMessage({
-                    action = "OpenTooltip",
-                    menu = self:CloneTable(menuoptions)
-                })
+                if (menuoptions.job == PlayerData.job.name or menuoptions.job == nil or (menuoptions.job[PlayerData.job.name] and menuoptions.job[PlayerData.job.name]<=PlayerData.job.grade.level)) then 
+                    TooltipActive = true
+                    CurrentZoneOptions = menuoptions
+                    InZone = true
+                    SendNUIMessage({
+                        action = "OpenTooltip",
+                        menu = self:CloneTable(menuoptions)
+                    })
+                end
             else
                 if Config.Debug then
                     print('Exited Zone')
@@ -70,13 +74,15 @@ local Functions = {
                 if Config.Debug then
                     print('Entered Zone')
                 end
-                TooltipActive = true
-                CurrentZoneOptions = menuoptions
-                InZone = true
-                SendNUIMessage({
-                    action = "OpenTooltip",
-                    menu = self:CloneTable(menuoptions)
-                })
+                if (menuoptions.job == PlayerData.job.name or menuoptions.job == nil or (menuoptions.job[PlayerData.job.name] and menuoptions.job[PlayerData.job.name]<=PlayerData.job.grade.level)) then 
+                    TooltipActive = true
+                    CurrentZoneOptions = menuoptions
+                    InZone = true
+                    SendNUIMessage({
+                        action = "OpenTooltip",
+                        menu = self:CloneTable(menuoptions)
+                    })
+                end
             else
                 if Config.Debug then
                     print('Exited Zone')
@@ -99,13 +105,15 @@ local Functions = {
                 if Config.Debug then
                     print('Entered Zone')
                 end
-                TooltipActive = true
-                CurrentZoneOptions = menuoptions
-                InZone = true
-                SendNUIMessage({
-                    action = "OpenTooltip",
-                    menu = self:CloneTable(menuoptions)
-                })
+                if (menuoptions.job == PlayerData.job.name or menuoptions.job == nil or (menuoptions.job[PlayerData.job.name] and menuoptions.job[PlayerData.job.name]<=PlayerData.job.grade.level)) then
+                    TooltipActive = true
+                    CurrentZoneOptions = menuoptions
+                    InZone = true
+                    SendNUIMessage({
+                        action = "OpenTooltip",
+                        menu = self:CloneTable(menuoptions)
+                    })
+                end
             else
                 if Config.Debug then
                     print('Exited Zone')
@@ -128,13 +136,15 @@ local Functions = {
                 if Config.Debug then
                     print('Entered Zone')
                 end
-                TooltipActive = true
-                CurrentZoneOptions = menuoptions
-                InZone = true
-                SendNUIMessage({
-                    action = "OpenTooltip",
-                    menu = self:CloneTable(menuoptions)
-                })
+                if (menuoptions.job == PlayerData.job.name or menuoptions.job == nil or (menuoptions.job[PlayerData.job.name] and menuoptions.job[PlayerData.job.name]<=PlayerData.job.grade.level)) then
+                    TooltipActive = true
+                    CurrentZoneOptions = menuoptions
+                    InZone = true
+                    SendNUIMessage({
+                        action = "OpenTooltip",
+                        menu = self:CloneTable(menuoptions)
+                    })
+                end
             else
                 if Config.Debug then
                     print('Exited Zone')
@@ -245,6 +255,7 @@ RegisterNUICallback('SelectOption', function(option, cb)
                 print("No trigger setup")
             end
         end
+        MenuActive = false
     end)
 end)
 
@@ -268,7 +279,8 @@ CreateThread(function()
         for k, v in pairs(Config.CircleZones) do
             Functions:AddCircleZone(v.name, v.coords, v.radius, {
                 name = v.name,
-                debugPoly = v.debugPoly
+                debugPoly = v.debugPoly,
+                useZ = v.useZ
             }, v.menuoptions)
         end
     elseif Config.CircleZones == nil then
