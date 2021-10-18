@@ -1,14 +1,16 @@
 /* Nice font for button from Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap");
 
-* { /* Reseting HTML */
+* {
+    /* Reseting HTML */
     padding: 0;
     margin: 0;
-    font-family: 'Poppins', sans-serif !important;
+    font-family: "Poppins", sans-serif !important;
     font-weight: 300;
 }
 
-#container { /* Container for buttons */
+#container {
+    /* Container for buttons */
     position: absolute;
     height: auto;
     top: 20%;
@@ -17,7 +19,8 @@
     background: transparent !important;
 }
 
-#buttons { /* Group for buttons */
+#buttons {
+    /* Group for buttons */
     max-height: 75vh;
     width: 31vw;
     overflow-x: none;
@@ -25,24 +28,29 @@
     padding: 10px;
 }
 
-html, body { /* Don't show a white background */
+html,
+body {
+    /* Don't show a white background */
     background: transparent !important;
 }
 
-#buttons::-webkit-scrollbar { /* Make the scrollbar invisible */
+#buttons::-webkit-scrollbar {
+    /* Make the scrollbar invisible */
     display: none;
 }
 
-body::-webkit-scrollbar { /* Make the scrollbar invisible */
+body::-webkit-scrollbar {
+    /* Make the scrollbar invisible */
     display: none;
 }
 
-.button { /* Design for button */
+.button {
+    /* Design for button */
     width: auto;
     max-width: 45%;
     height: 10%;
-    background: #111518;
-    color: #F8E6C9;
+    background: rgba(23, 23, 23, 90%);
+    color: white;
     margin: auto;
     position: relative;
     top: 10%;
@@ -52,20 +60,24 @@ body::-webkit-scrollbar { /* Make the scrollbar invisible */
     border-radius: 0.15rem;
     display: flex;
     flex-direction: column;
-    box-shadow: 0.0rem 0.0rem 0.1rem 0.05rem #000000;
+    box-shadow: 0rem 0rem 0.1rem 0.05rem #000000;
+    cursor: pointer;
 }
 
-.button:hover { /* When player hover a button */
-    background-color: #191F24;
+.button:hover {
+    /* When player hover a button */
+    background-color: #dc143c;
 }
 
-.button > .text { /* Text on buttons */
+.button > .text {
+    /* Text on buttons */
     flex-direction: column;
     font-size: 0.775rem;
     overflow: hidden;
 }
 
-.button > .header { /* Bold header for better understanding */
+.button > .header {
+    /* Bold header for better understanding */
     width: 100%;
     max-width: 100%;
     display: flex;
@@ -73,8 +85,47 @@ body::-webkit-scrollbar { /* Make the scrollbar invisible */
     position: relative;
     justify-content: left;
     overflow: wrap;
-    color: #F8E6C9;
+    color: white;
     font-size: 0.875rem;
     overflow: hidden;
-    font-weight: 500;
+}
+
+.title {
+    /* Design for button */
+    width: auto;
+    max-width: 45%;
+    height: 10%;
+    background: rgba(23, 23, 23, 90%);
+    color: white;
+    margin: auto;
+    position: relative;
+    top: 10%;
+    margin-top: 0.5rem;
+    overflow: hidden;
+    padding: 0.45rem;
+    border-radius: 0.15rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0rem 0rem 0.1rem 0.05rem #000000;
+}
+
+.title > .text {
+    /* Text on buttons */
+    flex-direction: column;
+    font-size: 0.775rem;
+    overflow: hidden;
+}
+
+.title > .header {
+    /* Bold header for better understanding */
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: left;
+    overflow: wrap;
+    color: white;
+    font-size: 0.875rem;
+    overflow: hidden;
 }
