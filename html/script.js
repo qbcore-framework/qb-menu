@@ -2,6 +2,7 @@ let buttonParams = [];
 let menuHistory = [];
 
 const openMenu = (data = null, useHistory = false) => {
+    let html = "";
     if (useHistory) {
         $("#buttons").html(" ");
         buttonParams = [];
@@ -12,48 +13,31 @@ const openMenu = (data = null, useHistory = false) => {
         let header = item.header;
         let message = item.txt || item.text;
         let isMenuHeader = item.isMenuHeader;
-
-        if (!isMenuHeader) {
-            $("#buttons").append(getButtonRender(header, message, index));
-        } else {
-            $("#buttons").append(getTitleRender(header,message,index));
-        }
-
+        html += getButtonRender(header, message, index, isMenuHeader);
         if (item.params) buttonParams[index] = item.params;
     });
+
+    $("#buttons").html(html);
     menuHistory.push(data);
 };
 
-const getButtonRender = (header, message = null, id) => {
+const getButtonRender = (header, message = null, id, isMenuHeader) => {
     if (message) {
         return `
-            <div class="button" data-btn-id="${id}">
+            <div class="${
+                isMenuHeader ? "title" : "button"
+            }" data-btn-id="${id}">
                 <div class="header">${header}</div>
-                <div class="txt">${message}</div>
+                <div class="text">${message}</div>
             </div>
         `;
     } else {
         return `
-            <div class="button" data-btn-id="${id}">
+            <div class="${
+                isMenuHeader ? "title" : "button"
+            }" data-btn-id="${id}">
                 <div class="header">${header}</div>
             </div>
-        `;
-    }
-};
-
-const getTitleRender = (header, message = null, id) => {
-    if (message) {
-        return `
-        <div class="title">
-            <div class="header">${header}</div>
-            <div class="txt">${message}</div>
-        </div>
-        `;
-    } else {
-        return `
-        <div class="title">
-            <div class="header">${header}</div>
-        </div>
         `;
     }
 };
