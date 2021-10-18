@@ -2,7 +2,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap");
 
 * {
-    /* Reseting HTML */
     padding: 0;
     margin: 0;
     font-family: "Poppins", sans-serif !important;
@@ -10,7 +9,6 @@
 }
 
 #container {
-    /* Container for buttons */
     position: absolute;
     height: auto;
     top: 20%;
@@ -20,7 +18,6 @@
 }
 
 #buttons {
-    /* Group for buttons */
     max-height: 75vh;
     width: 31vw;
     overflow-x: none;
@@ -30,22 +27,18 @@
 
 html,
 body {
-    /* Don't show a white background */
     background: transparent !important;
 }
 
 #buttons::-webkit-scrollbar {
-    /* Make the scrollbar invisible */
     display: none;
 }
 
 body::-webkit-scrollbar {
-    /* Make the scrollbar invisible */
     display: none;
 }
 
 .button {
-    /* Design for button */
     width: auto;
     max-width: 45%;
     height: 10%;
@@ -65,12 +58,10 @@ body::-webkit-scrollbar {
 }
 
 .button:hover {
-    /* When player hover a button */
     background-color: #dc143c;
 }
 
 .title {
-    /* Design for button */
     width: auto;
     max-width: 45%;
     height: 10%;
@@ -89,14 +80,12 @@ body::-webkit-scrollbar {
 }
 
 div > .text {
-    /* Text on buttons */
     flex-direction: column;
     font-size: 0.75rem;
     overflow: hidden;
 }
 
 div > .header {
-    /* Bold header for better understanding */
     width: 100%;
     max-width: 100%;
     display: flex;
