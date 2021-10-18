@@ -17,7 +17,7 @@ local function closeMenu()
 end
 
 RegisterNUICallback('clickedButton', function(data)
-    PlaySoundFrontend(-1, 'Highlight_Cancel','DLC_HEIST_PLANNING_BOARD_SOUNDS', 1) 
+    PlaySoundFrontend(-1, 'Highlight_Cancel','DLC_HEIST_PLANNING_BOARD_SOUNDS', 1)
     SetNuiFocus(false)
     if data.isServer then
         TriggerServerEvent(data.event, data.args)
@@ -27,11 +27,6 @@ RegisterNUICallback('clickedButton', function(data)
 end)
 
 RegisterNUICallback('closeMenu', function()
-    SetNuiFocus(false)
-end)
-
-RegisterNUICallback('stopFocus', function()
-    menuOpened = true
     SetNuiFocus(false)
 end)
 

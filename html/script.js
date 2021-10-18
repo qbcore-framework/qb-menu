@@ -48,7 +48,6 @@ const closeMenu = () => {
 };
 
 const useHistory = () => {
-    $.post(`https://${GetParentResourceName()}/stopFocus`, JSON.stringify({}));
     return openMenu(null, true);
 };
 
