@@ -28,6 +28,7 @@ end)
 RegisterNUICallback('closeMenu', function()
     menuOpened = false
     SetNuiFocus(false)
+    PlaySoundFrontend(-1, 'Highlight_Cancel','DLC_HEIST_PLANNING_BOARD_SOUNDS', 1)    
 end)
 
 RegisterCommand('+playerfocus', function()
