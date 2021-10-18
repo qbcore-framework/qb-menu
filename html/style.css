@@ -69,27 +69,6 @@ body::-webkit-scrollbar {
     background-color: #dc143c;
 }
 
-.button > .text {
-    /* Text on buttons */
-    flex-direction: column;
-    font-size: 0.775rem;
-    overflow: hidden;
-}
-
-.button > .header {
-    /* Bold header for better understanding */
-    width: 100%;
-    max-width: 100%;
-    display: flex;
-    align-items: center;
-    position: relative;
-    justify-content: left;
-    overflow: wrap;
-    color: white;
-    font-size: 0.875rem;
-    overflow: hidden;
-}
-
 .title {
     /* Design for button */
     width: auto;
@@ -109,14 +88,14 @@ body::-webkit-scrollbar {
     box-shadow: 0rem 0rem 0.1rem 0.05rem #000000;
 }
 
-.title > .text {
+div > .text {
     /* Text on buttons */
     flex-direction: column;
-    font-size: 0.775rem;
+    font-size: 0.75rem;
     overflow: hidden;
 }
 
-.title > .header {
+div > .header {
     /* Bold header for better understanding */
     width: 100%;
     max-width: 100%;
@@ -126,6 +105,7 @@ body::-webkit-scrollbar {
     justify-content: left;
     overflow: wrap;
     color: white;
-    font-size: 0.875rem;
+    font-size: 0.9rem;
+    font-weight: 400;
     overflow: hidden;
 }
