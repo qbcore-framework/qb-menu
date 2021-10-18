@@ -1,12 +1,13 @@
-fx_version 'bodacious'
+fx_version 'cerulean'
 game 'gta5'
 
-author 'LeZach#3819'
-description 'NoPixel Inspired Context Menu [based on nh-context]'
-version '1.0.4'
+description 'QB-Menu'
+version '0.0.1'
 
 client_script 'client/main.lua'
+
 ui_page 'html/index.html'
+
 files {
     'html/index.html',
     'html/script.js',
