@@ -2,119 +2,102 @@ let buttonParams = [];
 let menuHistory = [];
 
 const openMenu = (data = null, useHistory = false) => {
-  if (useHistory) {
-    $('#buttons').html(' ');
-    buttonParams = [];
-    data = menuHistory[menuHistory.length - 2];
-  }
-
-  data.forEach((item, index) => {
-    let header = item.header;
-    let message = item.txt || item.text;
-    let isMenuHeader = item.isMenuHeader;
-
-    if (!isMenuHeader) {
-      $('#buttons').append(getButtonRender(header, message, index));
-    } else {
-      $('#buttons').append(getTitleRender(header, message, index));
+    let html = "";
+    if (useHistory) {
+        $("#buttons").html(" ");
+        buttonParams = [];
+        data = menuHistory[menuHistory.length - 2];
     }
 
-    if (item.params) buttonParams[index] = item.params;
-  });
-  menuHistory.push(data);
+    data.forEach((item, index) => {
+        let header = item.header;
+        let message = item.txt || item.text;
+        let isMenuHeader = item.isMenuHeader;
+        html += getButtonRender(header, message, index, isMenuHeader);
+        if (item.params) buttonParams[index] = item.params;
+    });
+
+    $("#buttons").html(html);
+    menuHistory.push(data);
 };
 
-const getButtonRender = (header, message = null, id) => {
-  if (message) {
-    return `
-            <div class="button" data-btn-id="${id}">
+const getButtonRender = (header, message = null, id, isMenuHeader) => {
+    if (message) {
+        return `
+            <div class="${
+                isMenuHeader ? "title" : "button"
+            }" data-btn-id="${id}">
                 <div class="header">${header}</div>
-                <div class="txt">${message}</div>
+                <div class="text">${message}</div>
             </div>
         `;
-  } else {
-    return `
-            <div class="button" data-btn-id="${id}">
+    } else {
+        return `
+            <div class="${
+                isMenuHeader ? "title" : "button"
+            }" data-btn-id="${id}">
                 <div class="header">${header}</div>
             </div>
         `;
-  }
-};
-
-const getTitleRender = (header, message = null, id) => {
-  if (message) {
-    return `
-        <div class="title">
-            <div class="header">${header}</div>
-            <div class="txt">${message}</div>
-        </div>
-        `;
-  } else {
-    return `
-        <div class="title">
-            <div class="header">${header}</div>
-        </div>
-        `;
-  }
+    }
 };
 
 const closeMenu = () => {
-  $('#buttons').html(' ');
-  buttonParams = [];
+    $("#buttons").html(" ");
+    buttonParams = [];
 };
 
 const useHistory = () => {
-  $.post(`https://${GetParentResourceName()}/stopFocus`, JSON.stringify({}));
-  return openMenu(null, true);
+    return openMenu(null, true);
 };
 
 const postData = (id) => {
-  if (!buttonParams[id]) return useHistory();
+    if (!buttonParams[id]) return useHistory();
 
-  $.post(
-    `https://${GetParentResourceName()}/clickedButton`,
-    JSON.stringify(buttonParams[id])
-  );
-  return closeMenu();
+    $.post(
+        `https://${GetParentResourceName()}/clickedButton`,
+        JSON.stringify(buttonParams[id])
+    );
+    return closeMenu();
 };
 
 const cancelMenu = () => {
-  $.post(`https://${GetParentResourceName()}/closeMenu`);
-  return closeMenu();
+    $.post(`https://${GetParentResourceName()}/closeMenu`);
+    return closeMenu();
 };
 
 const clearHistory = () => {
-  menuHistory = [];
+    menuHistory = [];
 };
 
 $(document).click(function (event) {
-  let target = $(event.target);
-  if (target.closest('.button').length && $('.button').is(':visible')) {
-    let btnId = $(event.target).closest('.button').data('btn-id');
-    postData(btnId);
-  }
+    let target = $(event.target);
+    if (target.closest(".button").length && $(".button").is(":visible")) {
+        let btnId = $(event.target).closest(".button").data("btn-id");
+        postData(btnId);
+    }
 });
 
-window.addEventListener('message', (event) => {
-  const data = event.data;
-  const buttons = data.data;
-  const action = data.action;
-  switch (action) {
-    case 'OPEN_MENU':
-      return openMenu(buttons);
-    case 'CLOSE_MENU':
-      return closeMenu();
-    case 'CLEAR_HISTORY':
-      return clearHistory();
-    default:
-      return;
-  }
+window.addEventListener("message", (event) => {
+    const data = event.data;
+    const buttons = data.data;
+    const action = data.action;
+    switch (action) {
+        case "OPEN_MENU":
+            return openMenu(buttons);
+        case "CLOSE_MENU":
+            return closeMenu();
+        case "CLEAR_HISTORY":
+            return clearHistory();
+        default:
+            return;
+    }
 });
 
 document.onkeyup = function (event) {
-  const charCode = event.key;
-  if (charCode == 'Escape') {
-    cancelMenu();
-    clearHistory();
-  }
+    const charCode = event.key;
+    if (charCode == "Escape") {
+        cancelMenu();
+        clearHistory();
+    }
 };
