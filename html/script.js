@@ -1,76 +1,120 @@
-let ButtonsData = [];
-let Buttons = [];
-let Button = [];
+let buttonParams = [];
+let menuHistory = [];
 
-const closeMenu = () => {
-    $.post(`https://${GetParentResourceName()}/closeMenu`);
-    for (let i = 0; i < ButtonsData.length; i++) {
-        $(".button").remove();
-    };
-    ButtonsData = [];
-    Buttons = [];
-    Button = [];
+const openMenu = (data = null, useHistory = false) => {
+  if (useHistory) {
+    $('#buttons').html(' ');
+    buttonParams = [];
+    data = menuHistory[menuHistory.length - 2];
+  }
+
+  data.forEach((item, index) => {
+    let header = item.header;
+    let message = item.txt || item.text;
+    let isMenuHeader = item.isMenuHeader;
+
+    if (!isMenuHeader) {
+      $('#buttons').append(getButtonRender(header, message, index));
+    } else {
+      $('#buttons').append(getTitleRender(header, message, index));
+    }
+
+    if (item.params) buttonParams[index] = item.params;
+  });
+  menuHistory.push(data);
 };
 
-const drawButtons = (data) => {
-    ButtonsData = data;
-    for (let i = 0; i < ButtonsData.length; i++) {
-        let header = ButtonsData[i].header;
-        let message = ''
+const getButtonRender = (header, message = null, id) => {
+  if (message) {
+    return `
+            <div class="button" data-btn-id="${id}">
+                <div class="header">${header}</div>
+                <div class="txt">${message}</div>
+            </div>
+        `;
+  } else {
+    return `
+            <div class="button" data-btn-id="${id}">
+                <div class="header">${header}</div>
+            </div>
+        `;
+  }
+};
 
-        if (ButtonsData[i].txt) {
-            message = ButtonsData[i].txt
-        }
-        if (ButtonsData[i].text) {
-            message = ButtonsData[i].text
-        }
+const getTitleRender = (header, message = null, id) => {
+  if (message) {
+    return `
+        <div class="title">
+            <div class="header">${header}</div>
+            <div class="txt">${message}</div>
+        </div>
+        `;
+  } else {
+    return `
+        <div class="title">
+            <div class="header">${header}</div>
+        </div>
+        `;
+  }
+};
 
-        let id = ButtonsData[i].id;
-        let element;
+const closeMenu = () => {
+  $('#buttons').html(' ');
+  buttonParams = [];
+};
 
-        element = $(`
-            <div class="button" id=` + id + `>
-                <div class="header" id=` + id + `>` + header + `</div>
-                <div class="text" id=` + id + `>` + message + `</div>
-            </div>`);
-        $('#buttons').append(element);
-        Buttons[id] = element;
-        if (ButtonsData[i].params) {
-            Button[id] = ButtonsData[i].params
-        };
-    };
+const useHistory = () => {
+  $.post(`https://${GetParentResourceName()}/stopFocus`, JSON.stringify({}));
+  return openMenu(null, true);
+};
+
+const postData = (id) => {
+  if (!buttonParams[id]) return useHistory();
+
+  $.post(
+    `https://${GetParentResourceName()}/clickedButton`,
+    JSON.stringify(buttonParams[id])
+  );
+  return closeMenu();
+};
+
+const cancelMenu = () => {
+  $.post(`https://${GetParentResourceName()}/closeMenu`);
+  return closeMenu();
+};
+
+const clearHistory = () => {
+  menuHistory = [];
 };
 
 $(document).click(function (event) {
-    let $target = $(event.target);
-    if ($target.closest('.button').length && $('.button').is(":visible")) {
-        let id = event.target.id;
-        if (!Button[id]) return
-        postData(id);
-    }
+  let target = $(event.target);
+  if (target.closest('.button').length && $('.button').is(':visible')) {
+    let btnId = $(event.target).closest('.button').data('btn-id');
+    postData(btnId);
+  }
 });
 
-const postData = (id) => {
-    $.post(`https://${GetParentResourceName()}/clickedButton`, JSON.stringify(Button[id]));
-    return closeMenu();
-};
-
-window.addEventListener("message", (event) => {
-    const data = event.data;
-    const infos = data.data;
-    const action = data.action;
-    switch (action) {
-        case "OPEN_MENU":
-            return drawButtons(infos);
-        case "CLOSE_MENU":
-            return closeMenu();
-        default:
-            return;
-    };
+window.addEventListener('message', (event) => {
+  const data = event.data;
+  const buttons = data.data;
+  const action = data.action;
+  switch (action) {
+    case 'OPEN_MENU':
+      return openMenu(buttons);
+    case 'CLOSE_MENU':
+      return closeMenu();
+    case 'CLEAR_HISTORY':
+      return clearHistory();
+    default:
+      return;
+  }
 });
 
 document.onkeyup = function (event) {
-    if (event.key == 'Escape') {
-        closeMenu();
-    };
+  const charCode = event.key;
+  if (charCode == 'Escape') {
+    cancelMenu();
+    clearHistory();
+  }
 };
