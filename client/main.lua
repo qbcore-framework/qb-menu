@@ -27,6 +27,7 @@ RegisterNUICallback('clickedButton', function(data)
 end)
 
 RegisterNUICallback('closeMenu', function()
+    menuOpened = false
     SetNuiFocus(false)
 end)
 
