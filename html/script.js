@@ -21,6 +21,19 @@ const openMenu = (data = null, useHistory = false) => {
     menuHistory.push(data);
 };
 
+const showHeader = (data = null) => {
+    let html = "";
+    data.forEach((item, index) => {
+        let header = item.header;
+        let message = item.txt || item.text;
+        let isMenuHeader = item.isMenuHeader;
+        html += getButtonRender(header, message, index, isMenuHeader);
+        if (item.params) buttonParams[index] = item.params;
+    });
+    $("#buttons").html(html);
+    menuHistory.push(data);
+}
+
 const getButtonRender = (header, message = null, id, isMenuHeader) => {
     if (message) {
         return `
@@ -85,6 +98,8 @@ window.addEventListener("message", (event) => {
     switch (action) {
         case "OPEN_MENU":
             return openMenu(buttons);
+        case "SHOW_HEADER":
+            return showHeader(buttons);
         case "CLOSE_MENU":
             return closeMenu();
         case "CLEAR_HISTORY":
