@@ -1,5 +1,9 @@
 local headerShown = false
 
+RegisterNetEvent('qb-menu:openMenu', function(data)
+    openMenu(data)
+end)
+
 local function openMenu(data)
     if not data then return end
     SetNuiFocus(true, true)
