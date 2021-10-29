@@ -1,10 +1,7 @@
 local headerShown = false
 
-RegisterNetEvent('qb-menu:openMenu', function(data)
-    openMenu(data)
-end)
 
-function openMenu(data)
+local function openMenu(data)
     if not data then return end
     SetNuiFocus(true, true)
     headerShown = false
@@ -14,7 +11,7 @@ function openMenu(data)
     })
 end
 
-function closeMenu()
+local function closeMenu()
     headerShown = false
     SetNuiFocus(false)
     SendNUIMessage({
@@ -22,13 +19,17 @@ function closeMenu()
     })
 end
 
-function showHeader(data)
+local function showHeader(data)
     headerShown = true
     SendNUIMessage({
         action = 'SHOW_HEADER',
         data = data
     })
 end
+
+RegisterNetEvent('qb-menu:openMenu', function(data)
+    openMenu(data)
+end)
 
 RegisterNUICallback('clickedButton', function(data)
     if headerShown then headerShown = false end
