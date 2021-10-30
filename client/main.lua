@@ -26,8 +26,7 @@ local function showHeader(data)
     })
 end
 
-RegisterNetEvent('qb-menu:openMenu')
-AddEventHandler('qb-menu:openMenu', function(data)
+RegisterNetEvent('qb-menu:openMenu', function(data)
     openMenu(data)
 end)
 
