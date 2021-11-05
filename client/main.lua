@@ -26,6 +26,14 @@ local function showHeader(data)
     })
 end
 
+RegisterNetEvent('qb-menu:client:openMenu', function(data)
+    openMenu(data)
+end)
+
+RegisterNetEvent('qb-menu:client:closeMenu', function()
+    closeMenu()
+end)
+
 RegisterNUICallback('clickedButton', function(data)
     if headerShown then headerShown = false end
     PlaySoundFrontend(-1, 'Highlight_Cancel','DLC_HEIST_PLANNING_BOARD_SOUNDS', 1)
