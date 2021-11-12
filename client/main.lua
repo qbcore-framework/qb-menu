@@ -38,10 +38,18 @@ RegisterNUICallback('clickedButton', function(data)
     if headerShown then headerShown = false end
     PlaySoundFrontend(-1, 'Highlight_Cancel','DLC_HEIST_PLANNING_BOARD_SOUNDS', 1)
     SetNuiFocus(false)
-    if data.isServer then
-        TriggerServerEvent(data.event, data.args)
-    else
-        TriggerEvent(data.event, data.args)
+    if data.event then
+        if data.isServer then
+            TriggerServerEvent(data.event, data.args)
+        elseif data.isCommand then
+            ExecuteCommand(data.event)
+        elseif data.isQBCommand then
+            TriggerServerEvent('QBCore:CallCommand', data.event, data.args)
+        elseif isAction then
+            data.event(data.args)
+        else
+            TriggerEvent(data.event, data.args)
+        end
     end
 end)
 
