@@ -8,7 +8,6 @@ const openMenu = (data = null, useHistory = false) => {
         buttonParams = [];
         data = menuHistory[menuHistory.length - 2];
     }
-
     data.forEach((item, index) => {
         let header = item.header;
         let message = item.txt || item.text;
@@ -69,7 +68,7 @@ const postData = (id) => {
 
     $.post(
         `https://${GetParentResourceName()}/clickedButton`,
-        JSON.stringify(buttonParams[id])
+        JSON.stringify(id + 1)
     );
     return closeMenu();
 };
