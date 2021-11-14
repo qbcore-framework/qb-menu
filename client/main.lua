@@ -34,7 +34,8 @@ RegisterNetEvent('qb-menu:client:closeMenu', function()
     closeMenu()
 end)
 
-RegisterNUICallback('clickedButton', function(data)
+-- Commented out action as it is returning nil reference on table?
+RegisterNUICallback('clickedButton', function(data, cb)
     if headerShown then headerShown = false end
     PlaySoundFrontend(-1, 'Highlight_Cancel','DLC_HEIST_PLANNING_BOARD_SOUNDS', 1)
     SetNuiFocus(false)
@@ -45,12 +46,14 @@ RegisterNUICallback('clickedButton', function(data)
             ExecuteCommand(data.event)
         elseif data.isQBCommand then
             TriggerServerEvent('QBCore:CallCommand', data.event, data.args)
-        elseif isAction then
-            data.event(data.args)
+        -- elseif data.isAction then
+        --     print(json.encode(data))
+        --     data.event(data.args)
         else
             TriggerEvent(data.event, data.args)
         end
     end
+    cb('ok')
 end)
 
 RegisterNUICallback('closeMenu', function()
