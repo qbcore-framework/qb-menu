@@ -45,7 +45,7 @@ RegisterNUICallback('clickedButton', function(data)
             ExecuteCommand(data.event)
         elseif data.isQBCommand then
             TriggerServerEvent('QBCore:CallCommand', data.event, data.args)
-        elseif isAction then
+        elseif data.isAction then
             data.event(data.args)
         else
             TriggerEvent(data.event, data.args)
