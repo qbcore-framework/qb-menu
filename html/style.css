@@ -79,6 +79,15 @@ body::-webkit-scrollbar {
     box-shadow: 0rem 0rem 0.1rem 0.05rem #000000;
 }
 
+.title > div.header {
+    text-decoration: underline !important;
+}
+
+.disabled {
+    background: rgba(102, 102, 102, 0.9) !important;
+    cursor: default;
+}
+
 div > .text {
     flex-direction: column;
     font-size: 0.75rem;
