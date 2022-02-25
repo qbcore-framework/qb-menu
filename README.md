@@ -24,6 +24,17 @@ RegisterCommand("qbmenutest", function(source, args, raw)
                 }
             }
         },
+                {
+            header = "Sub Menu Button",
+            txt = "This goes to a sub menu",
+            disabled = true,
+            params = {
+                event = "qb-menu:client:testMenu2",
+                args = {
+                    number = 1,
+                }
+            }
+        },
     })
 end)
 ```
