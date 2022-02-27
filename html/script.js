@@ -3,12 +3,14 @@ let buttonParams = [];
 const openMenu = (data = null) => {
     let html = "";
     data.forEach((item, index) => {
-        let header = item.header;
-        let message = item.txt || item.text;
-        let isMenuHeader = item.isMenuHeader;
-        let isDisabled = item.disabled;
-        html += getButtonRender(header, message, index, isMenuHeader, isDisabled);
-        if (item.params) buttonParams[index] = item.params;
+        if(!item.hidden) {
+            let header = item.header;
+            let message = item.txt || item.text;
+            let isMenuHeader = item.isMenuHeader;
+            let isDisabled = item.disabled;
+            html += getButtonRender(header, message, index, isMenuHeader, isDisabled);
+            if (item.params) buttonParams[index] = item.params;
+        }
     });
 
     $("#buttons").html(html);
