@@ -107,3 +107,13 @@ div > .header {
     font-weight: 400;
     overflow: hidden;
 }
+
+@media (width: 3840px) and (height: 2160px) {
+    * {
+        padding: 0;
+        margin: 0;
+        font-family: "Poppins", sans-serif !important;
+        font-weight: 300;
+        font-size: 1.5vh;
+    }
+}
