@@ -1,5 +1,5 @@
 local QBCore = exports['qb-core']:GetCoreObject()
-local img = "qb-inventory/html/"
+local img = "qb-inventory/html/images/"
 
 
 local headerShown = false
@@ -11,8 +11,8 @@ local function openMenu(data)
 	for _,v in pairs(data) do 
 		if v["icon"] then
 			if QBCore.Shared.Items[tostring(v["icon"])] then
-				if not string.find(QBCore.Shared.Items[tostring(v["icon"])].image, "images/") then 
-					img = img.."images/"
+				if not string.find(QBCore.Shared.Items[tostring(v["icon"])].image, ""..img.."images/") then 
+					img = img
 				end
 				v["icon"] = img..QBCore.Shared.Items[tostring(v["icon"])].image
 			end
