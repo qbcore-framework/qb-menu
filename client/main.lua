@@ -1,5 +1,4 @@
 local QBCore = exports['qb-core']:GetCoreObject()
-local img = "qb-inventory/html/"
 
 
 local headerShown = false
@@ -7,6 +6,7 @@ local sendData = nil
 
 -- Functions
 local function openMenu(data)
+    local img = "qb-inventory/html/"
     if not data or not next(data) then return end
 	for _,v in pairs(data) do 
 		if v["icon"] then
