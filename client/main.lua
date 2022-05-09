@@ -11,7 +11,9 @@ local function openMenu(data)
 	for _,v in pairs(data) do 
 		if v["icon"] then
 			if QBCore.Shared.Items[tostring(v["icon"])] then
-				if not string.find(QBCore.Shared.Items[tostring(v["icon"])].image, ""..img.."images/") then 
+				if not string.find(QBCore.Shared.Items[tostring(v["icon"])].image, ""..img.."") then 
+					img = img
+				end
 					img = img
 				end
 				v["icon"] = img..QBCore.Shared.Items[tostring(v["icon"])].image
