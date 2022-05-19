@@ -58,7 +58,7 @@ end)
 
 -- NUI Callbacks
 
-RegisterNUICallback('clickedButton', function(option)
+RegisterNUICallback('clickedButton', function(option, cb)
     if headerShown then headerShown = false end
     PlaySoundFrontend(-1, 'Highlight_Cancel', 'DLC_HEIST_PLANNING_BOARD_SOUNDS', 1)
     SetNuiFocus(false)
@@ -81,12 +81,14 @@ RegisterNUICallback('clickedButton', function(option)
             end
         end
     end
+    cb('ok')
 end)
 
-RegisterNUICallback('closeMenu', function()
+RegisterNUICallback('closeMenu', function(_, cb)
     headerShown = false
     sendData = nil
     SetNuiFocus(false)
+    cb('ok')
 end)
 
 -- Command and Keymapping
