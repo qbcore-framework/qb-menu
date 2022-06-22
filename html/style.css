@@ -96,9 +96,6 @@ body::-webkit-scrollbar {
     display: flex;
     flex-direction: column;
     box-shadow: 0rem 0rem 0.5rem 0.05rem #000000;
-}
-
-.title > div.header {
     text-decoration: underline !important;
 }
 
