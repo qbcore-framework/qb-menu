@@ -17,6 +17,7 @@ RegisterCommand("qbmenutest", function(source, args, raw)
         {
             header = "Sub Menu Button",
             txt = "This goes to a sub menu",
+            -- image = "https://www.pngimg.com/img.png", an example of how an image on hove would be written
             params = {
                 event = "qb-menu:client:testMenu2",
                 args = {
