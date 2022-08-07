@@ -1,4 +1,5 @@
 let buttonParams = [];
+let images = [];
 
 const openMenu = (data = null) => {
     let html = "";
@@ -39,6 +40,7 @@ const getButtonRender = (header, message = null, id, isMenuHeader, isDisabled, i
 const closeMenu = () => {
     $("#buttons").html(" ");
     buttonParams = [];
+    images = [];
 };
 
 const postData = (id) => {
