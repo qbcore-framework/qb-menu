@@ -74,3 +74,18 @@ document.onkeyup = function (event) {
         cancelMenu();
     }
 };
+
+window.addEventListener('mousemove', (event) => {
+    let $target = $(event.target);
+    if ($target.closest('.button:hover').length && $('.button').is(":visible")) {
+        let id = event.target.id;
+        if (!images[id]) return
+        if (images[id].image) {
+            document.getElementById('image').src = images[id].image;
+            document.getElementById('imageHover').style.display = 'block';
+        }
+    }
+    else {
+        document.getElementById('imageHover').style.display = 'none';
+    }
+})
