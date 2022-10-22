@@ -34,7 +34,11 @@ local function closeMenu()
     SendNUIMessage({
         action = 'CLOSE_MENU'
     })
+
 end
+
+RegisterNetEvent('qb-menu:client:menuClosed', function() --WKD
+end)--WKD
 
 local function showHeader(data)
     if not data or not next(data) then return end
@@ -89,6 +93,7 @@ RegisterNUICallback('closeMenu', function(_, cb)
     sendData = nil
     SetNuiFocus(false)
     cb('ok')
+    TriggerEvent('qb-menu:client:menuClosed')
 end)
 
 -- Command and Keymapping
