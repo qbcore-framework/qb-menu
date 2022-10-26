@@ -37,9 +37,6 @@ local function closeMenu()
 
 end
 
-RegisterNetEvent('qb-menu:client:menuClosed', function() --WKD
-end)--WKD
-
 local function showHeader(data)
     if not data or not next(data) then return end
     headerShown = true
