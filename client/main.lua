@@ -89,6 +89,7 @@ RegisterNUICallback('closeMenu', function(_, cb)
     sendData = nil
     SetNuiFocus(false)
     cb('ok')
+    TriggerEvent("qb-menu:client:menuClosed")
 end)
 
 -- Command and Keymapping
