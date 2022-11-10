@@ -15,7 +15,7 @@ local function sortData(data, skipfirst)
     if skipfirst then
         table.insert(tempData,1,header)
     end
-    return tempData   
+    return tempData
 end
 
 local function openMenu(data, sort, skipFirst)
