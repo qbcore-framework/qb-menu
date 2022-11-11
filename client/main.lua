@@ -9,11 +9,11 @@ local function sortData(data, skipfirst)
     local header = data[1]
     local tempData = data
     if skipfirst then
-        table.remove(tempData,1)
+        tempData[1] = nil
     end
     table.sort(tempData, function(a,b) return a.header < b.header end)
     if skipfirst then
-        table.insert(tempData,1,header)
+        tempData[1] = header
     end
     return tempData
 end
