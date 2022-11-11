@@ -13,7 +13,7 @@ local function sortData(data, skipfirst)
     end
     table.sort(tempData, function(a,b) return a.header < b.header end)
     if skipfirst then
-        tempData[1] = header
+        table.insert(tempData,1,header)
     end
     return tempData
 end
