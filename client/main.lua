@@ -5,8 +5,19 @@ local headerShown = false
 local sendData = nil
 
 -- Functions
-local function openMenu(data)
+
+local function sortData(data, skipfirst)
+    local header = data[1]
+    local tempData = data
+    if skipfirst then table.remove(tempData,1) end
+    table.sort(tempData, function(a,b) return a.header < b.header end)
+    if skipfirst then table.insert(tempData,1,header) end
+    return tempData
+end
+
+local function openMenu(data, sort, skipFirst)
     if not data or not next(data) then return end
+    if sort then data = sortData(data, skipFirst) end
 	for _,v in pairs(data) do
 		if v["icon"] then
 			local img = "qb-inventory/html/"
@@ -48,8 +59,8 @@ end
 
 -- Events
 
-RegisterNetEvent('qb-menu:client:openMenu', function(data)
-    openMenu(data)
+RegisterNetEvent('qb-menu:client:openMenu', function(data, sort, skipFirst)
+    openMenu(data, sort, skipFirst)
 end)
 
 RegisterNetEvent('qb-menu:client:closeMenu', function()
