@@ -40,6 +40,7 @@ const getButtonRender = (header, message = null, id, isMenuHeader, isDisabled, i
 
 const closeMenu = () => {
     $("#buttons").html(" ");
+    $('#imageHover').css('display' , 'none');
     buttonParams = [];
     images = [];
 };
