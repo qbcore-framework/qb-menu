@@ -1,4 +1,5 @@
 let buttonParams = [];
+let images = [];
 
 const openMenu = (data = null) => {
     let html = "";
@@ -9,6 +10,7 @@ const openMenu = (data = null) => {
             let isMenuHeader = item.isMenuHeader;
             let isDisabled = item.disabled;
             let icon = item.icon;
+            images[index] = item;
             html += getButtonRender(header, message, index, isMenuHeader, isDisabled, icon);
             if (item.params) buttonParams[index] = item.params;
         }
@@ -39,6 +41,7 @@ const getButtonRender = (header, message = null, id, isMenuHeader, isDisabled, i
 const closeMenu = () => {
     $("#buttons").html(" ");
     buttonParams = [];
+    images = [];
 };
 
 const postData = (id) => {
@@ -67,6 +70,21 @@ window.addEventListener("message", (event) => {
             return;
     }
 });
+
+window.addEventListener('mousemove', (event) => {
+    let $target = $(event.target);
+    if ($target.closest('.button:hover').length && $('.button').is(":visible")) {
+        let id = event.target.id;
+        if (!images[id]) return
+        if (images[id].image) {
+            $('#image').attr('src', images[id].image);
+            $('#imageHover').css('display' , 'block');
+        }
+    }
+    else {
+        $('#imageHover').css('display' , 'none');
+    }
+})
 
 document.onkeyup = function (event) {
     const charCode = event.key;
