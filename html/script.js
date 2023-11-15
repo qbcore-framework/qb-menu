@@ -27,7 +27,7 @@ const openMenu = (data = null) => {
 const getButtonRender = (header, message = null, id, isMenuHeader, isDisabled, icon) => {
     return `
         <div class="${isMenuHeader ? "title" : "button"} ${isDisabled ? "disabled" : ""}" id="${id}">
-            <div class="icon"> <img src=nui://${icon} width=30px onerror="this.onerror=null; this.remove();"> <i class="${icon}" onerror="this.onerror=null; this.remove();"></i> </div>
+            <div class="icon"> <img src=${icon} width=30px onerror="this.onerror=null; this.remove();"> <i class="${icon}" onerror="this.onerror=null; this.remove();"></i> </div>
             <div class="column">
             <div class="header"> ${header}</div>
             ${message ? `<div class="text">${message}</div>` : ""}
