@@ -174,3 +174,16 @@ div > .header {
   font-weight: 400;
   overflow: hidden;
 }
+
+#imageHover {
+    position: absolute;
+    top: 10%;
+    right: 25em;
+}
+
+#image {
+    src: "";
+    max-height: 40vh;
+    max-width: 40vw;
+    object-fit: scale-down;
+}
