@@ -1,5 +1,5 @@
 local QBCore = exports['qb-core']:GetCoreObject()
-
+RegisterNetEvent('QBCore:Client:UpdateObject', function() QBCore = exports['qb-core']:GetCoreObject() end)
 
 local headerShown = false
 local sendData = nil
@@ -20,12 +20,10 @@ local function openMenu(data, sort, skipFirst)
     if sort then data = sortData(data, skipFirst) end
 	for _,v in pairs(data) do
 		if v["icon"] then
-			local img = "qb-inventory/html/"
 			if QBCore.Shared.Items[tostring(v["icon"])] then
-				if not string.find(QBCore.Shared.Items[tostring(v["icon"])].image, "images/") then
-					img = img.."images/"
+				if not string.find(QBCore.Shared.Items[tostring(v["icon"])].image, "//") and not string.find(v["icon"], "//") then
+                    v["icon"] = "nui://qb-inventory/html/images/"..QBCore.Shared.Items[tostring(v["icon"])].image
 				end
-				v["icon"] = img..QBCore.Shared.Items[tostring(v["icon"])].image
 			end
 		end
 	end
