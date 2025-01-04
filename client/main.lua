@@ -74,8 +74,8 @@ RegisterNUICallback('clickedButton', function(option, cb)
     if sendData then
         local data = sendData[tonumber(option)]
         sendData = nil
-        if data.isAction ~= nil then 
-            data.isAction()
+        if data.action ~= nil then 
+            data.action()
             cb('ok')
             return
         end
