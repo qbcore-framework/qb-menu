@@ -74,6 +74,11 @@ RegisterNUICallback('clickedButton', function(option, cb)
     if sendData then
         local data = sendData[tonumber(option)]
         sendData = nil
+        if data.isAction ~= nil then 
+            data.isAction()
+            cb('ok')
+            return
+        end
         if data then
             if data.params.event then
                 if data.params.isServer then
@@ -92,6 +97,7 @@ RegisterNUICallback('clickedButton', function(option, cb)
     end
     cb('ok')
 end)
+
 
 RegisterNUICallback('closeMenu', function(_, cb)
     headerShown = false
