@@ -3,13 +3,28 @@ Menu System for the QBCore Framework
 
 This is a modified version of **[NH Context](https://forum.cfx.re/t/no-longer-supported-standalone-nerohiro-s-context-menu-dynamic-event-firing-menu/2564083)** by **[NeroHiro](https://github.com/nerohiro)**
 
---[[
-EXAMPLE MENU
---]]
+## Menu Item
 
-```
+| Param | Description | Type | Default value |
+| ----- | ----------- | ---- | ------- |
+| header| The item title | string | No default |
+| txt? | The item description | string | "" |
+| isMenuHeader? | Whether the item is the header of the menu | boolean | false |
+| disabled? | Whether the item is clickable | boolean | false |
+| params | The options of the menu | table | No default |
+| params.event | Event name, command or function | string \| function | "" |
+| params.isAction? | Whether the event is a function | boolean | false |
+| params.isServer? | Whether the event is the name of a server event | boolean | false |
+| params.isCommand? | Whether the event is the name of command | boolean | false |
+| params.isQBCommand? | Whether the event is the name of a qbcore command | boolean | false |
+| params.args? | Arguments for the events/commans/function | table | nil |
+
+
+# Examples
+
+```LUA
 RegisterCommand("qbmenutest", function(source, args, raw)
-    openMenu({
+    exports["qb-menu"]:openMenu({
         {
             header = "Main Title",
             isMenuHeader = true, -- Set to true to make a nonclickable title
@@ -39,10 +54,10 @@ RegisterCommand("qbmenutest", function(source, args, raw)
     })
 end)
 ```
-```
+```LUA
 RegisterNetEvent('qb-menu:client:testMenu2', function(data)
     local number = data.number
-    openMenu({
+    exports["qb-menu"]:openMenu({
         {
             header = "< Go Back",
         },
@@ -59,7 +74,7 @@ RegisterNetEvent('qb-menu:client:testMenu2', function(data)
     })
 end)
 ```
-```
+```LUA
 RegisterNetEvent('qb-menu:client:testButton', function(data)
     TriggerEvent('QBCore:Notify', data.message)
 end)
