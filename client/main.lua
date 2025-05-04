@@ -3,8 +3,14 @@ RegisterNetEvent('QBCore:Client:UpdateObject', function() QBCore = exports['qb-c
 
 local headerShown = false
 local sendData = nil
+local menuFocus = false
 
 -- Functions
+
+local function setMenuFocus(state)
+    menuFocus = state
+    SetNuiFocus(state, state)
+end
 
 local function sortData(data, skipfirst)
     local header = data[1]
@@ -27,7 +33,7 @@ local function openMenu(data, sort, skipFirst)
 			end
 		end
 	end
-    SetNuiFocus(true, true)
+    setMenuFocus(true)
     headerShown = false
     sendData = data
     SendNUIMessage({
@@ -39,7 +45,7 @@ end
 local function closeMenu()
     sendData = nil
     headerShown = false
-    SetNuiFocus(false)
+    setMenuFocus(false)
     SendNUIMessage({
         action = 'CLOSE_MENU'
     })
@@ -70,7 +76,7 @@ end)
 RegisterNUICallback('clickedButton', function(option, cb)
     if headerShown then headerShown = false end
     PlaySoundFrontend(-1, 'Highlight_Cancel', 'DLC_HEIST_PLANNING_BOARD_SOUNDS', 1)
-    SetNuiFocus(false)
+    setMenuFocus(false)
     if sendData then
         local data = sendData[tonumber(option)]
         sendData = nil
@@ -102,7 +108,7 @@ end)
 RegisterNUICallback('closeMenu', function(_, cb)
     headerShown = false
     sendData = nil
-    SetNuiFocus(false)
+    setMenuFocus(false)
     cb('ok')
     TriggerEvent("qb-menu:client:menuClosed")
 end)
@@ -110,8 +116,8 @@ end)
 -- Command and Keymapping
 
 RegisterCommand('playerfocus', function()
-    if headerShown then
-        SetNuiFocus(true, true)
+    if headerShown and not menuFocus then
+        setMenuFocus(true)
     end
 end)
 
